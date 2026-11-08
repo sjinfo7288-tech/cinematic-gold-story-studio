@@ -44,7 +44,7 @@ export function Panel({ title, description, children, actions }: { title: string
   );
 }
 
-export function FieldRow({ label, htmlFor, children, hint, className }: { label: string; htmlFor?: string; children: ReactNode; hint?: string | undefined; className?: string }) {
+export function FieldRow({ label, htmlFor, children, hint, className }: { label: string; htmlFor?: string | undefined; children: ReactNode; hint?: string | undefined; className?: string | undefined }) {
   return (
     <div className={cn("space-y-2", className)}>
       <Label htmlFor={htmlFor} className="font-caps text-[0.62rem] text-gold">

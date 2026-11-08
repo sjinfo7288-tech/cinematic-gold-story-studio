@@ -38,6 +38,7 @@ export function Lightbox({
 
   if (!open || typeof document === "undefined") return null;
   const item = items[index!];
+  if (!item) return null;
 
   return createPortal(
     <div

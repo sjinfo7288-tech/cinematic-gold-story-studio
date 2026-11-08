@@ -30,7 +30,7 @@ export function PhotosTab({ photos, galleries }: { photos: Photo[]; galleries: G
     try {
       for (let i = 0; i < list.length; i++) {
         setUploading(`Uploading ${i + 1} of ${list.length}…`);
-        const f = list[i];
+        const f = list[i]!;
         const { url, path } = await uploadMedia(f, "photos");
         const title = f.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ").trim();
         const { error } = await supabase.from("photos").insert({
