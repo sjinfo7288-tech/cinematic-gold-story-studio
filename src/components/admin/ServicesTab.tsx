@@ -31,7 +31,7 @@ export function ServicesTab({ services }: { services: Service[] }) {
 
   const save = async () => {
     if (!draft) return;
-    if (!draft.title.trim()) return toast.error("Please enter a service title.");
+    if (!draft.title.trim()) { toast.error("Please enter a service title."); return; }
     setBusy(true);
     try {
       const row = {
@@ -58,7 +58,7 @@ export function ServicesTab({ services }: { services: Service[] }) {
 
   const remove = async (s: Service) => {
     const { error } = await supabase.from("services").delete().eq("id", s.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await deleteMedia(s.image_url);
     await refresh();
     toast.success("Service deleted.");

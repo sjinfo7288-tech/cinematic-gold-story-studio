@@ -20,7 +20,7 @@ export function VideosTab({ videos, settings }: { videos: Video[]; settings: Sit
 
   const upload = async (file: File | undefined) => {
     if (!file) return;
-    if (!file.type.startsWith("video/")) return toast.error("Please choose a video file.");
+    if (!file.type.startsWith("video/")) { toast.error("Please choose a video file."); return; }
     setBusy(true);
     try {
       const { url, path } = await uploadMedia(file, "videos");
@@ -45,9 +45,9 @@ export function VideosTab({ videos, settings }: { videos: Video[]; settings: Sit
 
   const addLink = async () => {
     const url = link.trim();
-    if (!/^https?:\/\/\S+$/.test(url)) return toast.error("Please paste a full video link starting with https://");
+    if (!/^https?:\/\/\S+$/.test(url)) { toast.error("Please paste a full video link starting with https://"); return; }
     const { error } = await supabase.from("videos").insert({ url, title: linkTitle.trim() || "Video", source: "link", sort_order: 100 });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setLink("");
     setLinkTitle("");
     await refresh();
@@ -102,19 +102,19 @@ function VideoCard({ video, featured }: { video: Video; featured: boolean }) {
 
   const setFeatured = async () => {
     const { error } = await supabase.from("site_settings").update({ featured_video_url: video.url }).eq("id", 1);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await refresh();
     toast.success("Featured video changed.");
   };
   const saveTitle = async () => {
     const { error } = await supabase.from("videos").update({ title: title.trim() }).eq("id", video.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await refresh();
     toast.success("Title saved.");
   };
   const remove = async () => {
     const { error } = await supabase.from("videos").delete().eq("id", video.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (featured) await supabase.from("site_settings").update({ featured_video_url: null }).eq("id", 1);
     await deleteMedia(video.storage_path);
     await refresh();

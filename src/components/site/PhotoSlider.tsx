@@ -30,10 +30,10 @@ export function PhotoSlider({ photos }: { photos: Photo[] }) {
         className="group relative aspect-[4/5] overflow-hidden rounded-sm border border-gold/25 bg-ink shadow-card sm:aspect-[16/10] lg:aspect-[16/8]"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+        onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? null)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
+          const dx = (e.changedTouches[0]?.clientX ?? 0) - touchX.current;
           if (Math.abs(dx) > 40) go(dx > 0 ? index - 1 : index + 1);
           touchX.current = null;
         }}
@@ -66,7 +66,7 @@ export function PhotoSlider({ photos }: { photos: Photo[] }) {
               {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
             </p>
             <p key={index} className="mt-2 truncate font-display text-2xl text-foreground animate-in fade-in slide-in-from-bottom-2 duration-700 md:text-4xl">
-              {photos[index].title}
+              {photos[index]?.title}
             </p>
           </div>
           <div className="flex shrink-0 gap-2">

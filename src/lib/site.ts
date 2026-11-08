@@ -62,7 +62,7 @@ export function isOfferActive(offer: Pick<Offer, "valid_until">, today = todayIS
 
 export function formatDate(iso: string | null) {
   if (!iso) return "";
-  const [y, m, d] = iso.split("-").map(Number);
+  const [y = 1970, m = 1, d = 1] = iso.split("-").map(Number);
   return new Date(y, m - 1, d).toLocaleDateString("en-IN", {
     day: "numeric",
     month: "long",

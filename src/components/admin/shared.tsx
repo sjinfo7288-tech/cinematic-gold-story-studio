@@ -44,7 +44,7 @@ export function Panel({ title, description, children, actions }: { title: string
   );
 }
 
-export function FieldRow({ label, htmlFor, children, hint, className }: { label: string; htmlFor?: string; children: ReactNode; hint?: string; className?: string }) {
+export function FieldRow({ label, htmlFor, children, hint, className }: { label: string; htmlFor?: string; children: ReactNode; hint?: string | undefined; className?: string }) {
   return (
     <div className={cn("space-y-2", className)}>
       <Label htmlFor={htmlFor} className="font-caps text-[0.62rem] text-gold">
@@ -75,7 +75,7 @@ export function ImageField({
 
   const pick = async (file: File | undefined) => {
     if (!file) return;
-    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file.");
+    if (!file.type.startsWith("image/")) { toast.error("Please choose an image file."); return; }
     setBusy(true);
     try {
       const { url } = await uploadMedia(file, folder);

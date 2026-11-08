@@ -57,7 +57,7 @@ export function PhotosTab({ photos, galleries }: { photos: Photo[]; galleries: G
     const name = newGallery.trim();
     if (!name) return;
     const { error } = await supabase.from("galleries").insert({ name, sort_order: galleries.length + 1 });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setNewGallery("");
     await refresh();
     toast.success("Gallery created.");
@@ -130,13 +130,13 @@ function GalleryRow({ gallery, count }: { gallery: Gallery; count: number }) {
   const dirty = name.trim() !== gallery.name;
   const save = async () => {
     const { error } = await supabase.from("galleries").update({ name: name.trim() }).eq("id", gallery.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await refresh();
     toast.success("Gallery renamed.");
   };
   const remove = async () => {
     const { error } = await supabase.from("galleries").delete().eq("id", gallery.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await refresh();
     toast.success("Gallery deleted. Its photos are kept under “No gallery”.");
   };
@@ -157,13 +157,13 @@ function PhotoCard({ photo, galleries, onPreview }: { photo: Photo; galleries: G
 
   const update = async (patch: Partial<Photo>, msg = "Photo updated.") => {
     const { error } = await supabase.from("photos").update(patch).eq("id", photo.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await refresh();
     toast.success(msg);
   };
   const remove = async () => {
     const { error } = await supabase.from("photos").delete().eq("id", photo.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await deleteMedia(photo.storage_path);
     await refresh();
     toast.success("Photo deleted.");

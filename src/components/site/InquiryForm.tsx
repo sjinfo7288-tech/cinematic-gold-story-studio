@@ -47,7 +47,7 @@ export function InquiryForm({
 }: {
   services: string[];
   whatsapp: string;
-  defaultService?: string;
+  defaultService?: string | undefined;
 }) {
   const initialService = defaultService && services.includes(defaultService) ? defaultService : "";
   const [values, setValues] = useState({ ...EMPTY, service: initialService });
@@ -306,9 +306,9 @@ function Field({
   children,
 }: {
   label: string;
-  error?: string;
+  error?: string | undefined;
   htmlFor: string;
-  className?: string;
+  className?: string | undefined;
   children: React.ReactNode;
 }) {
   return (

@@ -10,7 +10,7 @@ export function VideoPlayer({
 }: {
   url: string;
   title?: string | null;
-  className?: string;
+  className?: string | undefined;
   /** Autoplay muted on loop, like a background reel. */
   ambient?: boolean;
 }) {

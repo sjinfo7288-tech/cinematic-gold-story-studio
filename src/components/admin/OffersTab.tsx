@@ -31,8 +31,8 @@ export function OffersTab({ offers }: { offers: Offer[] }) {
 
   const save = async () => {
     if (!draft) return;
-    if (!draft.title.trim()) return toast.error("Please enter an offer title.");
-    if (draft.discount_percent < 0 || draft.discount_percent > 100) return toast.error("Discount must be between 0 and 100%.");
+    if (!draft.title.trim()) { toast.error("Please enter an offer title."); return; }
+    if (draft.discount_percent < 0 || draft.discount_percent > 100) { toast.error("Discount must be between 0 and 100%."); return; }
     setBusy(true);
     try {
       const row = {
@@ -59,7 +59,7 @@ export function OffersTab({ offers }: { offers: Offer[] }) {
 
   const remove = async (o: Offer) => {
     const { error } = await supabase.from("offers").delete().eq("id", o.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     await deleteMedia(o.image_url);
     await refresh();
     toast.success("Offer deleted.");
@@ -67,7 +67,7 @@ export function OffersTab({ offers }: { offers: Offer[] }) {
 
   const removeExpired = async () => {
     const { error } = await supabase.from("offers").delete().in("id", expired.map((o) => o.id));
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     for (const o of expired) await deleteMedia(o.image_url);
     await refresh();
     toast.success("Expired offers deleted.");

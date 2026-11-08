@@ -10,7 +10,7 @@ import { whatsappUrl } from "@/lib/inquiry";
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>): { service?: string } =>
-    typeof search.service === "string" ? { service: search.service.slice(0, 100) } : {},
+    typeof search["service"] === "string" ? { service: search["service"].slice(0, 100) } : {},
   head: () => ({
     meta: [
       { title: "Contact & Book — SJ Photography and Cinematic" },

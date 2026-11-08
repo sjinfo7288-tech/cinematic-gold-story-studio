@@ -46,10 +46,10 @@ export function Lightbox({
       aria-label="Photo preview"
       className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/95 backdrop-blur-sm animate-in fade-in duration-300"
       onClick={onClose}
-      onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+      onTouchStart={(e) => (touchX.current = e.touches[0]?.clientX ?? null)}
       onTouchEnd={(e) => {
         if (touchX.current === null) return;
-        const dx = e.changedTouches[0].clientX - touchX.current;
+        const dx = (e.changedTouches[0]?.clientX ?? 0) - touchX.current;
         if (Math.abs(dx) > 50) (dx > 0 ? prev : next)();
         touchX.current = null;
       }}

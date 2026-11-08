@@ -14,8 +14,8 @@ export function AccountTab({ email, onLogout }: { email: string; onLogout: () =>
 
   const change = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (next.length < 8) return toast.error("New password must be at least 8 characters.");
-    if (next !== confirm) return toast.error("New passwords do not match.");
+    if (next.length < 8) { toast.error("New password must be at least 8 characters."); return; }
+    if (next !== confirm) { toast.error("New passwords do not match."); return; }
     setBusy(true);
     try {
       // Confirm the current password before changing it.

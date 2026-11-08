@@ -46,7 +46,7 @@ function AuthPage() {
     e.preventDefault();
     setNotice(null);
     const cleanEmail = email.trim().toLowerCase();
-    if (!/^\S+@\S+\.\S+$/.test(cleanEmail)) return toast.error("Please enter a valid email address.");
+    if (!/^\S+@\S+\.\S+$/.test(cleanEmail)) { toast.error("Please enter a valid email address."); return; }
     setBusy(true);
     try {
       if (mode === "signin") {
