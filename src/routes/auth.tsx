@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import logoAsset from "@/assets/media/sj_logo.jpg.asset.json";
 
-export const OWNER_EMAIL = "sjinfo7288@gmail.com";
+const OWNER_EMAIL = "sjinfo7288@gmail.com";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
