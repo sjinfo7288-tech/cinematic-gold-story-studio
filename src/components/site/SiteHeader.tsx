@@ -58,8 +58,8 @@ export function SiteHeader() {
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              className="relative text-sm tracking-wide text-foreground/80 transition-colors hover:text-gold data-[status=active]:text-gold"
-              activeProps={{ "data-status": "active" } as Record<string, string>}
+              className="relative text-sm tracking-wide text-foreground/80 transition-colors hover:text-gold"
+              activeProps={{ className: "!text-gold" }}
             >
               {n.label}
             </Link>
