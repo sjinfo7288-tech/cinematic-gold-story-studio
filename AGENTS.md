@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Public pages read all site content through one server function (`getSiteData` in `src/lib/site-data.functions.ts`) cached under one query key; owner edits invalidate that key. Why: one fetch keeps every page in sync with dashboard changes.
+- Owner writes go straight from the browser client and are enforced by row-level security via `has_role(auth.uid(), 'admin')`. Why: no privileged server code needed; the database is the security boundary.
+- The owner role is granted only by a database trigger when the owner email confirms its account. Why: roles must never come from client input.
+- Uploaded media lives in a private storage bucket and is served through the `/media/$` server route (Range-aware). Why: public buckets are blocked in this workspace; the proxy gives stable, non-expiring URLs.
+- Inquiries are not stored; the form builds a pre-filled WhatsApp message to the owner's number. Why: the owner chose WhatsApp as the destination.

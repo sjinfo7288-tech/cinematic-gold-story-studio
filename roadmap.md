@@ -4,7 +4,8 @@
 - [x] Public pages: Home (hero video, slider), Gallery, Services, Offers, Contact
 - [x] Inquiry form → WhatsApp with pre-filled message
 - [x] Content storage, owner role, media library
-- [ ] Owner login, reset password, admin dashboard (website, photos, videos, services, offers, contact, account)
-- [ ] Inquiry form: clear success and error states, easy-to-understand WhatsApp handoff
-- [ ] Tests for inquiry rules and offer expiry
-- [ ] Verify end to end in the browser
+- [x] Owner login, reset password, admin dashboard (website, photos, videos, services, offers, contact, account)
+- [x] Inquiry form: clear success and error states, easy-to-understand WhatsApp handoff
+- [x] Tests for inquiry rules and offer expiry
+- [x] Verify public pages and inquiry flow in the browser
+- [ ] Owner creates their account (First-time setup on Owner Login) — waits on the owner confirming the email
