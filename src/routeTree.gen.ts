@@ -10,11 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as OffersRouteImport } from './routes/offers'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as MediaSplatRouteImport } from './routes/media/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MediaSplatRoute = MediaSplatRouteImport.update({
@@ -25,27 +49,51 @@ const MediaSplatRoute = MediaSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/services': typeof ServicesRoute
   '/media/$': typeof MediaSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/services': typeof ServicesRoute
   '/media/$': typeof MediaSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
+  '/offers': typeof OffersRoute
+  '/services': typeof ServicesRoute
   '/media/$': typeof MediaSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/media/$'
+  fullPaths:
+    '/' | '/contact' | '/gallery' | '/offers' | '/services' | '/media/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/media/$'
-  id: '__root__' | '/' | '/media/$'
+  to: '/' | '/contact' | '/gallery' | '/offers' | '/services' | '/media/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/gallery'
+    | '/offers'
+    | '/services'
+    | '/media/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
+  OffersRoute: typeof OffersRoute
+  ServicesRoute: typeof ServicesRoute
   MediaSplatRoute: typeof MediaSplatRoute
 }
 
@@ -56,6 +104,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/media/$': {
@@ -70,6 +146,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
+  OffersRoute: OffersRoute,
+  ServicesRoute: ServicesRoute,
   MediaSplatRoute: MediaSplatRoute,
 }
 export const routeTree = rootRouteImport
