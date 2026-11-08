@@ -110,7 +110,7 @@ export function InquiryForm({
                 setDateOpen(false);
               }}
               disabled={{ before: new Date() }}
-              initialFocus
+              autoFocus
               className="p-3 pointer-events-auto"
             />
           </PopoverContent>
