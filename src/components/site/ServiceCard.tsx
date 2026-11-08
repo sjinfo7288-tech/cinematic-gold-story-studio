@@ -8,6 +8,7 @@ import { Reveal } from "./Reveal";
 export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: number }) {
   return (
     <Reveal as="article" delay={delay} className="group relative flex flex-col overflow-hidden rounded-sm border border-border bg-card shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/50">
+      <div className="relative">
       <div className="relative aspect-[4/3] overflow-hidden">
         {service.image_url ? (
           <img
@@ -20,7 +21,8 @@ export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: 
           <div className="size-full bg-gold-gradient opacity-20" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
-        <div className="absolute -bottom-7 left-6 flex size-16 items-center justify-center rounded-full border border-gold/60 bg-ink text-gold shadow-gold transition-transform duration-500 group-hover:rotate-[360deg]">
+      </div>
+        <div className="absolute -bottom-7 z-10 left-6 flex size-16 items-center justify-center rounded-full border border-gold/60 bg-ink text-gold shadow-gold transition-transform duration-500 group-hover:rotate-[360deg]">
           <ServiceIcon name={service.icon} className="size-7" />
         </div>
       </div>
